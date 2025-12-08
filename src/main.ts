@@ -11,6 +11,19 @@ import { apiProducts } from './utils/data';
 const productsCatalog = new ProductsCatalog()
 const cart = new Cart()
 const customer = new Customer()
+const api = new Api(API_URL)
+const dataTransfer = new DataTransfer(api)
+
+async function fetchApiProducts() {
+  try {
+    const fetchData = await dataTransfer.getData()
+    productsCatalog.setItems(fetchData.items)
+    console.log('Массив товаров из каталога повторно: ', productsCatalog.getItems())
+  } catch (err) {
+    console.error('Ошибка при получении данных: ', err)
+  }
+}
+
 
 productsCatalog.setItems(apiProducts.items)
 console.log('Массив товаров из каталога: ', productsCatalog.getItems())
@@ -52,15 +65,5 @@ console.log('Незаполненные поля: ', customer.validateCustomerIn
 customer.clearCustomerInfo()
 console.log('Данные о пользователе после очистки: ', customer.getCustomerInfo())
 
-
-const api = new Api(API_URL)
-const dataTransfer = new DataTransfer(api)
-
-try {
-  const fetchData = await dataTransfer.getData()
-  productsCatalog.setItems(fetchData.items)
-  console.log('Массив товаров из каталога повторно: ', productsCatalog.getItems())
-} catch (err) {
-  console.error('Ошибка при получении данных: ', err)
-}
+fetchApiProducts()
 
