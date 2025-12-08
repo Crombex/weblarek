@@ -178,8 +178,8 @@ interface ICustomer {
 `validateCustomerInfo(): Partial<Record<keyof ICustomer, string>>` - проверяет корректность данных пользователя. Возвращает объект с ошибками валидации, например:  
 ```
 {
-  email: 'missing email value',
-  address: 'missing address value'
+  email: 'отсутствует поле email ',
+  address: 'отсутствует поле address '
 }
 ```
 Если ошибок нет, возвращается пустой объект.

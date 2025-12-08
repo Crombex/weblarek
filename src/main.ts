@@ -55,5 +55,12 @@ console.log('Данные о пользователе после очистки:
 
 const api = new Api(API_URL)
 const dataTransfer = new DataTransfer(api)
-productsCatalog.setItems((await dataTransfer.getData()).items)
-console.log('Массив товаров из каталога повторно: ', productsCatalog.getItems())
+
+try {
+  const fetchData = await dataTransfer.getData()
+  productsCatalog.setItems(fetchData.items)
+  console.log('Массив товаров из каталога повторно: ', productsCatalog.getItems())
+} catch (err) {
+  console.error('Ошибка при получении данных: ', err)
+}
+

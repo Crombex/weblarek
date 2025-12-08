@@ -14,7 +14,7 @@ export class Customer {
   validateCustomerInfo(): Partial<Record<keyof ICustomer, string>> {
     const resultObj = Object.fromEntries(Object.entries(this.customerInfo).filter(elem => elem[1] === ''))
     for (let key in resultObj) {
-      resultObj[key] = `missing ${key} value`
+      resultObj[key] = `отсутствует поле ${key}`
     }
     return resultObj
   }
